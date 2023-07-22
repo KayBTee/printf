@@ -17,8 +17,6 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == '\0')
-				break;
 			if (*format != 'c' && *format != 's' && *format != '%')
 			{
 				count += write(1, "%", 1);
