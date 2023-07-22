@@ -31,8 +31,8 @@ int _printf(const char *format, ...)
 						break;
 				case 's':
 						str = va_arg(args, char *);
-						if (str == NULL)
-							str = "(null)";
+						if (!str)
+							str = "(null)\0";
 						count += write(1, str, _strlen(str));
 						break;
 				case '%':
