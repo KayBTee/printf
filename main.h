@@ -18,7 +18,7 @@
 #define CONVERT_UNSIGNED 2
 
 /**
- * struct parameters _ parameters struct
+ * struct parameters - parameters struct
  * @unsign: flag if unsigned value
  * @plus_flag: on if plus_flag specified
  * @space_flag: on if hashtag_flag specified
@@ -50,16 +50,16 @@ typedef struct parameters
 } params_t;
 
 /**
-  * struct specifier - struct to map format specifiers to their
+  * struct specifiers - struct to map format specifiers to their
   * corresponding functions
   * @specifier: the format specifier
   * @f: the printing function
   */
-typedef struct specifiers 
+typedef struct specifiers
 {
 	char *specifier;
 	int (*f)(va_list, params_t *);
-}specifier_t;
+} specifier_t;
 
 /* _put.c */
 int _puts(char *str);
