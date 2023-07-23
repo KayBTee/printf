@@ -55,7 +55,7 @@ typedef struct parameters
   * @specifier: the format specifier
   * @f: the printing function
   */
-typedef struct specifiers
+typedef struct specifier
 {
 	char *specifier;
 	int (*f)(va_list, params_t *);
@@ -70,7 +70,7 @@ int print_char(va_list ap, params_t *params);
 int print_int(va_list ap, params_t *params);
 int print_string(va_list ap, params_t *params);
 int print_percent(va_list ap, params_t *params);
-int _print_S(va_list ap, params_t *params);
+int print_S(va_list ap, params_t *params);
 
 /* number.c */
 char *convert(long int num, int base, int flags, params_t *params);
@@ -78,7 +78,7 @@ int print_unsigned(va_list ap, params_t *params);
 int print_address(va_list ap, params_t *params);
 
 /* specifier.c */
-int (*get_specifier(char *s)(va_list ap, params_t *params);
+int (*get_specifier(char *s))(va_list ap, params_t *params);
 int get_print_func(char *s, va_list ap, params_t *params);
 int get_flag(char *s, params_t *params);
 int get_modifier(char *s, params_t *params);
