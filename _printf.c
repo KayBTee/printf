@@ -2,48 +2,46 @@
 /**
  * _printf - function producing output according to a format
  * @format: the pointer to the format specifier.
- * Return: the number of characters printed (excluding the null
- * byte used to end output to strings)
+ * Return: the number of bytes printed.
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int i, j, count = 0;
+	int sum = 0;
+	va_list ap;
+	char *p, *start;
+	params_t params = PARAMS_INIT;
 
-	spec_t specifiers[] = {
-		{"c", print_char},
-		{"s", print_string},
-		{"%", print_percent},
-		{NULL, NULL}
-	};
-	va_start(args, format);
-	for (i = 0; format && format[i]; i++)
+	va_start(ap, format);
+
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = (char *)format; *p; p++)
 	{
-		if (format[i] == '%')
+		init_params(&params, ap);
+		if (*p != '%')
 		{
-			if (format[i + 1] == '\0')
-				return (-1);
-			for (j = 0; specifiers[j].spec; j++)
-			{
-				if (format[i + 1] == *specifiers[j].spec)
-				{
-					count += specifiers[j].f(args);
-					i++;
-					break;
-				}
-			}
-			if (!specifiers[j].spec && format[i + 1] != '\0')
-			{
-				write(1, &format[i], 1);
-				count++;
-			}
+			sum += _putchar(*p);
+			continue;
 		}
+		start = p;
+		p++;
+		while (get_flag(p, &params)) /* while char at p is flag char */
+		{
+			p++; /* next char */
+		}
+		p = get_width(p, &params, ap);
+		p = get_percision(p, &params, ap);
+		if (get_modifier(p, &params))
+			p++;
+		if (!get_specifier(p))
+			sum += print_from_to(start, p,
+					params.l_modifier || params.h_modifier ? p - 1 : 0);
 		else
-		{
-			write(1, &format[i], 1);
-			count++;
-		}
+			sum += get_print_func(p, ap, &params);
 	}
-	va_end(args);
-	return (count);
+	_putchar(BUF_FLUSH);
+	va_end(ap);
+	return (sum);
 }
