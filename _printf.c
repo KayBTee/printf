@@ -7,43 +7,42 @@
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
-	char *str, c;
 	va_list args;
+	int i, j, count = 0;
 
+	spec_t specifiers[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"%", print_percent},
+		{NULL, NULL}
+	};
 	va_start(args, format);
-	for (; *format; format++)
+	for (i = 0; format && format[i]; i++)
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
-			format++;
-			if (*format != 'c' && *format != 's' && *format != '%')
+			if (format[i + 1] == '\0')
+				return (-1);
+			for (j = 0; specifiers[j].spec; j++)
 			{
-				count += write(1, "%", 1);
-				count += write(1, format, 1);
-				continue;
-			}
-			switch (*format)
-			{
-				case 'c':
-						c = va_arg(args, int);
-						count += write(1, &c, 1);
-						break;
-				case 's':
-						str = va_arg(args, char *);
-						if (!str)
-							str = "(null)\0";
-						count += write(1, str, _strlen(str));
-						break;
-				case '%':
-						count += write(1, "%", 1);
-						break;
-				default:
+				if (format[i + 1] == *specifiers[j].spec)
+				{
+					count += specifiers[j].f(args);
+					i++;
 					break;
+				}
+			}
+			if (!specifiers[j].spec && format[i + 1] != '\0')
+			{
+				write(1, &format[i], 1);
+				count++;
 			}
 		}
 		else
-			count += write(1, format, 1);
+		{
+			write(1, &format[i], 1);
+			count++;
+		}
 	}
 	va_end(args);
 	return (count);
