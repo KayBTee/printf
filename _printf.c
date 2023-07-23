@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * _printf - function producing output according to a format
- * @format: the pointer to the format specifier used
+ * @format: the pointer to the format specifier.
  * Return: the number of characters printed (excluding the null
  * byte used to end output to strings)
  */
