@@ -7,14 +7,16 @@
 
 int main(void)
 {
-        /*char *s;*/
+        char *s;
+	char *x;
 
-        /*s = "This is a string"; */
+        s = "This is a string";
+	x = NULL;
 
         _printf("%c\n", 'l');
         printf("%c\n", 'l');
-        _printf("%s\n", NULL);
-        printf("%s\n", NULL);
+        _printf("%s\n", x);
+        printf("%s\n", x);
         _printf("%%\n");
         printf("%%\n");
         return (0);
