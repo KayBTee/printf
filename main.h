@@ -50,7 +50,7 @@ typedef struct parameters
 } params_t;
 
 /**
-  * struct specifiers - struct to map format specifiers to their
+  * struct specifier - struct to map format specifiers to their
   * corresponding functions
   * @specifier: the format specifier
   * @f: the printing function

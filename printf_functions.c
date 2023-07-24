@@ -19,29 +19,13 @@ int print_char(va_list ap, params_t *params)
 	return (sum);
 }
 /**
-  * print_int - prints integer
-  * @ap: argument pointer
-  * @params: the parameters struct
-  * Return: number of chars printed
-  */
-/*int print_int(va_list ap, params_t *params)
-{
-	long l;
+ * print_string - Print a string argument from the variable argument list
+ * @ap: The va_list containing the variable arguments.
+ * @params: A pointer to the params_t structure containing format parameters.
+ *
+ * Return: The number of characters printed.
+*/
 
-	if (params->l_modifier)
-		l = va_arg(ap, long);
-	else if (params->h_modifier)
-		l = (short int)va_arg(ap, int);
-	else
-		l = (int)va_arg(ap, int);
-	return (print_number(convert(l, 10, 0, params), params));
-}
-**
- * print_string - prints string
- * @ap: arguments on va_list
- * @params: parameters structure
- * Return: number of characters printed
- */
 int print_string(va_list ap, params_t *params)
 {
 	char *str = va_arg(ap, char *), pad_char = ' ';
@@ -91,10 +75,10 @@ int print_percent(va_list ap, params_t *params)
   * @ap: argument pointer
   * @params: the parameters struct
   * Return: number chars printed
-  */
-/**
+  *
+  *
   * int print_S(va_list ap, params_t *params)
-  *	{
+  *{
   *	char *str = va_arg(ap, char *);
   *	char *hex;
   *	int sum = 0;
@@ -117,5 +101,6 @@ int print_percent(va_list ap, params_t *params)
   *			sum += _putchar(*str);
   *		}
   *	}
-  *	return (sum);
-} */
+  *
+  *}	return (sum);
+  */
