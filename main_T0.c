@@ -13,8 +13,8 @@ int main(void)
         s = "This is a string";
         x = NULL;
 
-        _printf("%c\n", 'H');
-        printf("%c\n", 'H');
+        _printf("%c\n", 65);
+        printf("%c\n", 65);
 
         _printf("%s\n", s);
          printf("%s\n", s);
