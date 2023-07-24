@@ -9,3 +9,4 @@ update _printf and main.h
 sort 2
 sort 3
 sort 4
+sort 5
