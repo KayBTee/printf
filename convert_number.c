@@ -22,8 +22,8 @@ int print_hex(va_list ap, params_t *params)
 	str = convert(l, 16, CONVERT_UNSIGNED | CONVERT_LOWERCASE, params);
 	if (params->hashtag_flag && l)
 	{
-		*--str = 'X';
-		*--str = 'O';
+		*--str = 'x';
+		*--str = '0';
 	}
 	params->unsign = 1;
 	return (c += print_number(str, params));
@@ -52,7 +52,7 @@ int print_HEX(va_list ap, params_t *params)
 	if (params->hashtag_flag && l)
 	{
 		*--str = 'X';
-		*--str = 'O';
+		*--str = '0';
 	}
 	params->unsign = 1;
 	return (c += print_number(str, params));
