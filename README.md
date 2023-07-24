@@ -20,3 +20,4 @@ update 31
 readme update o numbers function
 update 32
 update 33
+update 34
